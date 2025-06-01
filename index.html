@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creators Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">Content Creators Workshop</h1>
+                <div class="hidden md:flex space-x-4">
+                    <button id="loginBtn" class="px-4 py-2 text-gray-600 hover:text-gray-900">Login</button>
+                    <button id="registerBtn" class="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Auth Forms Section -->
+        <div id="authSection" class="max-w-md mx-auto">
+            <!-- Login Form -->
+            <div id="loginForm" class="bg-white p-8 rounded-lg shadow-md hidden">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Welcome Back</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black" autocomplete="email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black" autocomplete="current-password" required minlength="8">
+                        <p class="mt-1 text-sm text-gray-500">Forgot your password? <a href="#" class="text-black hover:underline">Reset it here</a></p>
+                    </div>
+                    <div id="loginError" class="hidden">
+                        <p class="text-red-600 text-sm">Invalid email or password. Please try again.</p>
+                    </div>
+                    <button type="submit" class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 relative">
+                        <span class="submit-text">Login</span>
+                        <span class="loading-text hidden">
+                            <i class="fas fa-circle-notch fa-spin mr-2"></i>Logging in...
+                        </span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Create Account</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black" autocomplete="name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black" autocomplete="email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black" autocomplete="new-password" required minlength="8">
+                        <p class="mt-1 text-sm text-gray-500">Password must be at least 8 characters long</p>
+                    </div>
+                    <div id="registerError" class="hidden">
+                        <p class="text-red-600 text-sm">Please fill in all fields correctly.</p>
+                    </div>
+                    <button type="submit" class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 relative">
+                        <span class="submit-text">Register</span>
+                        <span class="loading-text hidden">
+                            <i class="fas fa-circle-notch fa-spin mr-2"></i>Creating account...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Section (Hidden by default) -->
+        <div id="dashboardSection" class="hidden">
+            <!-- Content Creation Form -->
+            <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Create New Content</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Title</label>
+                        <input type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Content Type</label>
+                        <select class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black">
+                            <option>Blog Post</option>
+                            <option>Video</option>
+                            <option>Image</option>
+                            <option>Audio</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Content</label>
+                        <textarea rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Upload File (optional)</label>
+                        <input type="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800">
+                    </div>
+                    <button type="submit" class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800">
+                        Create Content
+                    </button>
+                </form>
+            </div>
+
+            <!-- Content List -->
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Your Content</h2>
+                <div class="space-y-6">
+                    <!-- Content Item Template -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Sample Blog Post</h3>
+                                <p class="text-sm text-gray-500">Blog Post • Created on Aug 1, 2023</p>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="p-2 text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="p-2 text-gray-400 hover:text-red-600">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-2 text-gray-600">This is a preview of the blog post content...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Get DOM elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginFormContainer = document.getElementById('loginForm');
+        const registerFormContainer = document.getElementById('registerForm');
+        const authSection = document.getElementById('authSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loginFormElement = loginFormContainer.querySelector('form');
+        const registerFormElement = registerFormContainer.querySelector('form');
+        const loginError = document.getElementById('loginError');
+        const registerError = document.getElementById('registerError');
+
+        // Toggle between login and register forms
+        loginBtn.addEventListener('click', () => {
+            loginFormContainer.classList.remove('hidden');
+            registerFormContainer.classList.add('hidden');
+        });
+
+        registerBtn.addEventListener('click', () => {
+            registerFormContainer.classList.remove('hidden');
+            loginFormContainer.classList.add('hidden');
+        });
+
+        // Helper function to toggle loading state
+        const toggleLoading = (form, isLoading) => {
+            const btn = form.querySelector('button[type="submit"]');
+            const submitText = btn.querySelector('.submit-text');
+            const loadingText = btn.querySelector('.loading-text');
+            
+            if (isLoading) {
+                submitText.classList.add('hidden');
+                loadingText.classList.remove('hidden');
+                btn.disabled = true;
+            } else {
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                btn.disabled = false;
+            }
+        };
+
+        // Form validation and submissions
+        loginFormElement.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = loginFormElement.querySelector('input[type="email"]').value;
+            const password = loginFormElement.querySelector('input[type="password"]').value;
+
+            if (!email || !password || password.length < 8) {
+                loginError.classList.remove('hidden');
+                return;
+            }
+
+            loginError.classList.add('hidden');
+            toggleLoading(loginFormElement, true);
+
+            try {
+                const response = await fetch('/api/workshop/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Login failed');
+                }
+                const data = await response.json();
+                console.log('Login successful:', data);
+                // Store token and update UI
+                localStorage.setItem('workshop_token', data.token);
+                alert('Login successful! (Demo)');
+                // Show dashboard and hide auth forms
+                authSection.classList.add('hidden');
+                dashboardSection.classList.remove('hidden');
+                loadContentList();
+            } catch (error) {
+                loginError.textContent = error.message;
+                loginError.classList.remove('hidden');
+            } finally {
+                toggleLoading(loginFormElement, false);
+            }
+        });
+
+        registerFormElement.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = registerFormElement.querySelector('input[type="text"]').value.trim();
+            const email = registerFormElement.querySelector('input[type="email"]').value.trim();
+            const password = registerFormElement.querySelector('input[type="password"]').value;
+
+            if (fullName === '' || email === '' || password === '' || password.length < 8) {
+                registerError.classList.remove('hidden');
+                return;
+            }
+
+            registerError.classList.add('hidden');
+            toggleLoading(registerFormElement, true);
+
+            try {
+                const response = await fetch('/api/workshop/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ full_name: fullName, email, password })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Registration failed');
+                }
+                const data = await response.json();
+                console.log('Registration successful:', data);
+                alert('Registration successful! Please log in.');
+                // Optionally switch to login form
+                registerBtn.click();
+            } catch (error) {
+                registerError.textContent = error.message;
+                registerError.classList.remove('hidden');
+            } finally {
+                toggleLoading(registerFormElement, false);
+            }
+        });
+
+        // Load content list from backend
+        async function loadContentList() {
+            const token = localStorage.getItem('workshop_token');
+            if (!token) return;
+            try {
+                const response = await fetch('/api/workshop/content', {
+                    headers: { 'Authorization': token }
+                });
+                if (!response.ok) throw new Error('Failed to load content');
+                const data = await response.json();
+                renderContentList(data.content);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // Render content list in dashboard
+        function renderContentList(contents) {
+            const contentListDiv = document.getElementById('contentList');
+            contentListDiv.innerHTML = '';
+            if (contents.length === 0) {
+                contentListDiv.innerHTML = '<p class="text-gray-600">No content created yet.</p>';
+                return;
+            }
+            contents.forEach(content => {
+                const div = document.createElement('div');
+                div.className = 'border-b border-gray-200 pb-6';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">${content.title}</h3>
+                            <p class="text-sm text-gray-500">${content.type}</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-400 hover:text-gray-600" onclick="editContent('${content.id}')">Edit</button>
+                            <button class="p-2 text-gray-400 hover:text-red-600" onclick="deleteContent('${content.id}')">Delete</button>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-gray-600">${content.text}</p>
+                `;
+                contentListDiv.appendChild(div);
+            });
+        }
+
+        // Create new content form submission
+        const createContentForm = document.getElementById('createContentForm');
+        createContentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('workshop_token');
+            if (!token) return alert('Not authenticated');
+            const title = createContentForm.querySelector('input[name="title"]').value.trim();
+            const type = createContentForm.querySelector('select[name="type"]').value;
+            const text = createContentForm.querySelector('textarea[name="text"]').value.trim();
+            if (!title || !text) return alert('Title and content are required');
+            try {
+                const response = await fetch('/api/workshop/content', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+                    body: JSON.stringify({ title, type, text })
+                });
+                if (!response.ok) throw new Error('Failed to create content');
+                await loadContentList();
+                createContentForm.reset();
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        // Edit content (placeholder)
+        window.editContent = function(contentId) {
+            alert('Edit content feature not implemented yet: ' + contentId);
+        };
+
+        // Delete content
+        window.deleteContent = async function(contentId) {
+            const token = localStorage.getItem('workshop_token');
+            if (!token) return alert('Not authenticated');
+            if (!confirm('Are you sure you want to delete this content?')) return;
+            try {
+                const response = await fetch('/api/workshop/content/' + contentId, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': token }
+                });
+                if (!response.ok) throw new Error('Failed to delete content');
+                await loadContentList();
+            } catch (error) {
+                alert(error.message);
+            }
+        };
+    </script>
+</body>
+</html>
